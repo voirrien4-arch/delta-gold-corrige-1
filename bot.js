@@ -310,8 +310,29 @@ async function handlePendingPairing(s) {
       s.pendingPairing = null;
       return;
     }
+
+    // Petite marge de sécurité: demander le code trop vite après l'ouverture du
+    // socket fait parfois échouer avec "Connection Closed" côté serveurs WhatsApp.
+    await new Promise(r => setTimeout(r, 2500));
+    if (!s.sock || s.sock.ended) return; // socket a changé/fermé entre-temps
+
     console.log(`📱 [${s.phone}] Génération du code de pairing...`);
-    const code = await s.sock.requestPairingCode(s.phone);
+    let code;
+    try {
+      code = await s.sock.requestPairingCode(s.phone);
+    } catch (firstErr) {
+      // Une seule nouvelle tentative automatique sur les erreurs transitoires connues.
+      const transient = /connection closed|timed out|econnreset/i.test(firstErr.message || '');
+      if (transient && s.sock && !s.sock.ended) {
+        console.warn(`⚠️ [${s.phone}] Échec transitoire ("${firstErr.message}"), nouvelle tentative dans 2s...`);
+        await new Promise(r => setTimeout(r, 2000));
+        if (!s.sock || s.sock.ended) return;
+        code = await s.sock.requestPairingCode(s.phone);
+      } else {
+        throw firstErr;
+      }
+    }
+
     console.log(`✅ [${s.phone}] Code de pairing généré: ${code}`);
     resolve(code);
     s.pendingPairing = null;
