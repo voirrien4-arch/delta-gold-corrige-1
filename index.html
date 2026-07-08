@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Delta Gold - WhatsApp Bot Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { light: '#FFD700', DEFAULT: '#DAA520', dark: '#B8860B', deeper: '#8B6914' },
+            wa: { green: '#00A884', dark: '#111B21', deeper: '#0B141A', header: '#202C33', input: '#2A3942', border: '#222D34', text: '#E9EDEF', muted: '#8696A0' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-wa-deeper min-h-dvh">
+  <div id="app"></div>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

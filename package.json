@@ -1,0 +1,25 @@
+{
+  "name": "delta-gold",
+  "version": "1.0.0",
+  "description": "Delta Gold - WhatsApp Bot by Mcamara (335 commandes)",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "verify": "node --input-type=module -e \"import fs from 'fs'; const required=['server.js','index.html','main.js','styles.css','bot.js']; let ok=true; for(const f of required){if(!exists(f)){ok=false}} function exists(f){if(fs.existsSync(f)){console.log('  ✅ '+f);return true}else{console.error('  ❌ '+f+' MISSING');return false}} if(!ok){console.error('\\n❌ Fichiers manquants! Les fichiers doivent être à la RACINE du repo GitHub, pas dans un sous-dossier.');process.exit(1)}else{console.log('\\n✅ Tous les fichiers trouvés!')}\"",
+    "build": "npm install && npm run verify"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.12",
+    "@hapi/boom": "^10.0.1",
+    "express": "^4.21.0",
+    "pino": "^9.4.0",
+    "dotenv": "^16.4.5",
+    "axios": "^1.7.7",
+    "node-cache": "^5.1.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

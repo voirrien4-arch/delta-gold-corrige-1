@@ -1,0 +1,20 @@
+{
+  "header": {
+    "status": "en ligne · 340 commandes · par Mcamara"
+  },
+  "chat": {
+    "today": "Aujourd'hui"
+  },
+  "pairing": {
+    "title": "Connecter votre WhatsApp",
+    "subtitle": "Session multi-appareils sécurisée · Pairing Code",
+    "phoneLabel": "Numéro de téléphone",
+    "phonePlaceholder": "+243 XXX XXX XXX",
+    "connectBtn": "Connecter",
+    "qrInstructions": "Scannez ce QR code avec WhatsApp",
+    "qrSteps": "WhatsApp > Appareils reliés > Scanner le code QR"
+  },
+  "input": {
+    "placeholder": "Tapez .menu pour voir les commandes..."
+  }
+}

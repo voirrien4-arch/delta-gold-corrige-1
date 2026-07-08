@@ -1,0 +1,31 @@
+# render.yaml — One-click Render Blueprint
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: delta-gold
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: npm run build
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: OWNER_NUMBER
+        sync: false
+      - key: OWNER_NAME
+        sync: false
+      - key: BOT_PREFIX
+        value: "."
+      - key: MISTRAL_API_KEY
+        sync: false
+      - key: MISTRAL_MODEL
+        value: mistral-small-latest
+      - key: MISTRAL_INSTRUCTIONS
+        sync: false
+      - key: CHANNEL_LINK
+        sync: false
+    disk:
+      name: auth-info
+      mountPath: /opt/render/project/src/auth_info
+      sizeGB: 1
